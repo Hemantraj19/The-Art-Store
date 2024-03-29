@@ -1,0 +1,46 @@
+{% include "header.html" %}
+
+<!-- ====================================Cards ==================================== -->
+<h3 class="m-5 text-white p-2">Your Arts</h3>
+<div class="row row-cols-1 row-cols-md-4 m-5">
+    {% for item, image in zipped_items %}
+    <div class="col mb-4">
+        <!-- Card -->
+        <div class="card" style="background-color: #212529;">
+
+            <!--Card image-->
+            <div class="view overlay">
+                <img class="card-img-top img-fluid p-2" src="{{image.image_url}}" alt="Card image cap"
+                    style="height: 300px; width: 100%; object-fit: fill; border-radius: 0.7rem;">
+                <div class="mask waves-effect waves-light rgba-white-slight"></div>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+                <!--Title-->
+                <h4 class="card-title text-white">{{item.name}}</h4>
+                <!--Text-->
+                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                <p type="button" class="btn-light-blue btn-md text-white">Rs {{item.price}}</p>
+                <div class="d-flex justify-content-between">
+                    <a href="" style="width: 50%;">
+                        <button class="btn btn-warning text-white" style="width: 60%;">Edit</button>
+                    </a>
+                    <a href="{{url_for('delete_item', item_id=item.id)}}">
+                        <button class="btn btn-danger">Delete</button>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<!-- ============================================================================== -->
+
+
+{% include "footer.html" %}

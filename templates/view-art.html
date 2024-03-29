@@ -1,0 +1,113 @@
+{% include "header.html" %}
+
+<div class="container" style="margin: 0;">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="m-2 box-container">
+                <div class="carousel-container" style="margin-left: -1.2rem;">
+                    <div id="controls" class="carousel slide" data-ride="carousel" data-interval="false">
+                        <div class="carousel-inner">
+                            {% for image in images %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <img src="{{image.image_url}}" class="d-block product-image">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#controls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#controls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 px-5">
+            <div class="heading-and-buttons p-2">
+                <h2 class="text-white">{{art.name}}</h2>
+                <p class="seller text-white">Sold by: {{seller.name}}</p>
+                <p class>⭐⭐⭐⭐</p>
+                <form id="cartOrBuyForm" action="{{url_for('add_to_cart', art_id=art.id)}}" method="post">
+                    <div class="price-quantity text-white">
+                        <p>Rs {{art.price}}0</p>
+                        <div class="qty">
+                            <p>Quantity: </p>
+                            <select name="quantity" id="quantity">
+                                {% for i in range(art.available_quantity) %}
+                                <option value="{{i+1}}">{{i+1}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="cart-buy-buttons">
+                        <hr style="color: white;">
+                        <!-- <a href="" style="display: contents;"> -->
+                        <button id="buyNowBtn" type="button" class="btn btn-success btn-lg btn-block"
+                            onclick="redirectToBuy()">Buy
+                            Now</button>
+                        <!-- </a> -->
+                        <br>
+                        <!-- <a id="cartLink" href="{{url_for('add_to_cart', art_id=art.id)}}" style="display: contents;"> -->
+                        <button id="addToCartBtn" type="submit" class="btn btn-danger btn-lg btn-block">Add To
+                            Cart</button>
+
+                        <!-- </a> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="m-4 description-box text-white">
+    <div class="p-5">
+        <h3>Product Description</h3>
+        <p>{{art.description}}</p>
+    </div>
+</div>
+
+<div class="m-4 description-box text-white">
+    <div class="p-5">
+        <div style="display: flex; justify-content: space-between;">
+            <h4>Rating And Reviews</h4>
+            <a href="{{url_for('rating')}}">
+                <button class="btn btn-primary">Rate Product</button>
+            </a>
+        </div>
+        {% for _ in range(3) %}
+        <div class="my-4 rating-box">
+            <div class="mx-3" style="display: flex;">
+                <p class="px-2" style="background-color: rgb(240, 232, 3);border-radius: 10px;color: rgb(87, 85, 85);">
+                    4⭐
+                </p>
+                <p class="px-4">Title</p>
+            </div>
+            <div class="mx-3">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat voluptatem provident culpa
+                    obcaecati,
+                    minus sint aliquam hic dolorem animi quo rem vitae sapiente dolores</p>
+                <p class="py-2">Review by: Hemant ✅</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function redirectToBuy() {
+        // Redirect to the 'buy_now' URL
+        window.location.href = "{{ url_for('buy_now', art_id=art.id) }}";
+    }
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+
+{% include "footer.html" %}

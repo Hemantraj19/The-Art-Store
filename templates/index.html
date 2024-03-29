@@ -1,0 +1,43 @@
+{% include "header.html" %}
+
+<!-- ====================================Cards ==================================== -->
+<h3 class="m-5 text-white p-2">Currently Popular</h3>
+<div class="row row-cols-1 row-cols-md-4 m-5">
+    {% for item, image in zipped_items %}
+    <div class="col mb-4">
+        <!-- Card -->
+        <div class="card" style="background-color: #212529;">
+
+            <!--Card image-->
+            <div class="view overlay">
+                <a href="{{url_for('view_art', art_id=item.id)}}" class="nav-link">
+                    <img class="card-img-top img-fluid p-2" src="{{image.image_url}}" alt="Card image cap"
+                        style="height: 300px; width: 100%; object-fit: fill; border-radius: 0.7rem;">
+                    <div class="mask waves-effect waves-light rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <!--Card content-->
+            <a href="{{url_for('view_art', art_id=item.id)}}" class="nav-link">
+                <div class="card-body">
+
+                    <!--Title-->
+                    <h4 class="card-title text-white">{{item.name}}</h4>
+                    <!--Text-->
+                    <p class="card-text text-white"> Sold by : Hemant</p>
+                    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                    <p type="button" class="btn-light-blue btn-md text-white">Rs {{item.price}}</p>
+
+                </div>
+            </a>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<!-- ============================================================================== -->
+
+
+{% include "footer.html" %}

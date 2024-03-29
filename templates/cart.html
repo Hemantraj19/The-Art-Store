@@ -1,0 +1,80 @@
+{% include "header.html" %}
+<div class="container">
+    <div class="row">
+        <div class="p-2 col-lg-8">
+            {% if not images_items_sellers_zipped: %}
+            <div class="m-5 d-flex justify-content-center align-item-center text-white">
+                <h2>No Cart Items </h2>
+            </div>
+            {% else: %}
+            {% for image,item,seller,quantity in images_items_sellers_zipped: %}
+            <div class="cart-box text-white mb-3">
+                <div class="p-2 row">
+                    <div class="col-md-5 cart-img">
+                        <img src="{{image.image_url}}" alt="Product">
+                    </div>
+                    <div class="col-md-3 cart-details mt-2">
+                        <h4>{{item.name}}</h4>
+                        <p>{{seller.name}}</p>
+                        <h5 class="price-format">₹ {{item.price}}</h5>
+                    </div>
+                    <div class="col-md-3 mx-4 mt-2">
+                        <p>Delivery in: 2 days</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-3 d-flex justify-content-between cart-quantity">
+                            <p>Quantity: {{quantity}}</p>
+                        </div>
+                        <div class="py-2 col d-flex justify-content-center">
+                            <a href="{{ url_for('buy_now', art_id=item.id) }}">
+                                <button class="btn btn-success" style="margin-right: 15px;">Buy Now</button>
+                            </a>
+                            <a href="{{url_for('remove_from_cart', item_id=item.id)}}">
+                                <button class="btn btn-danger">Remove</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="p-2 col-lg-4 text-white">
+            <div class="cart-box">
+                <h5>Price Details</h5>
+                <hr>
+                <div class="mx-2 d-flex justify-content-between">
+                    <p>Price({{no_items}} item{% if no_items > 1:%}s{%endif%})</p>
+                    <p class="price-format">₹ {{total_price}}</p>
+                </div>
+                <div class="mx-2 d-flex justify-content-between">
+                    <p>Delivery Charges</p>
+                    <p>Free</p>
+                </div>
+                <hr>
+                <div class="mx-2 py-2 d-flex justify-content-between">
+                    <p>Total Amount</p>
+                    <p class="price-format">₹ {{total_price}}</p>
+                </div>
+            </div>
+            <div class="d-grid gap-2 mt-3">
+                <a href="{{url_for('buy_from_cart')}}" style="display: contents;">
+                    <button class="btn btn-warning" type="button">Place Order</button>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const priceElements = document.querySelectorAll('.price-format');
+        priceElements.forEach(function (element) {
+            const price = parseFloat(element.textContent.replace('₹ ', '').replace(/,/g, ''));
+            const formattedPrice = price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+            element.textContent = formattedPrice;
+        });
+    });
+</script>
+
+{% include "footer.html" %}

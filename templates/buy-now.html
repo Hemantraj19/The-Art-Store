@@ -1,0 +1,160 @@
+{% include "header.html" %}
+<div class="container">
+    <div class="row p-2">
+        <div class="col-md-7 mb-3">
+            <div class="card mb-3 bg-dark text-white">
+                <div class="card-header p-3 px-4 fs-4 d-flex justify-content-between" id="address-body">
+                    Select Delivery Address
+                    <button id="change-button" class="btn  text-white" style="display: none;">Change</button>
+                </div>
+                <div class="card-body" id="address-list-body">
+                    <ul class="list-group" id="address-list">
+                        {% for address in addresses %}
+                        <li id="address-list{{loop.index}}"
+                            class="list-group-item d-flex justify-content-between align-items-center bg-dark text-white">
+                            <div class="address-details">
+                                <input type="radio" name="delivery_address" id="address{{loop.index}}"
+                                    class="address-radio" {% if loop.first %}checked{% endif %}>
+                                <label for="address{{loop.index}}">{{current_user.name}}</label>
+                                <address>
+                                    {{address.address}}<br>
+                                    {{address.city}}, {{address.state}} {{address.pincode}}<br>
+                                    {{address.phn_no}}
+                                </address>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary select-address"
+                                    data-address-index="{{loop.index}}">Deliver Here</button>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="pt-3 d-flex justify-content-center align-items-center">
+                        <a href="{{url_for('add_address')}}">
+                            <button class="btn btn-warning text-white">Add Address</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card order-summary hidden bg-dark text-white">
+                <div class="card-header fs-4 py-3">
+                    Order Summary
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 summary-order-img">
+                            <img src="{{image.image_url}}" alt="Product Image" style="border-radius: 0.3rem;">
+                            <div class="d-flex p-2">
+                                <p>Quantity: 1</p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <p>Item Name: {{item.name}}</p>
+                            <p>Seller: {{seller.name}}</p>
+                            <div class="d-flex">
+                                <p>Price: </p>
+                                <p class="price-format px-2">₹ {{item.price}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p>Delivery by: Delivery Date</p>
+                        </div>
+                    </div>
+                    <hr style="background-color: white; height: 0.9px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card price-details bg-dark text-white">
+                <div class="card-header">
+                    Price Details
+                </div>
+                <div class="card-body">
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <p>Price (1 item)</p>
+                        <p style="color: rgb(24, 186, 24);" class="price-format">₹ {{item.price}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Delivery Charges</p>
+                        <p style="color: rgb(24, 186, 24);">Free</p>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <p>Total Amount</p>
+                        <p style="color: rgb(24, 186, 24); font-weight: bold;" class="price-format">₹ {{item.price}}</p>
+                    </div>
+                    <div class="d-grid gap-2 proceed-to-payment-button pt-2">
+                        <a href="{{url_for('payment')}}" style="display: contents;">
+                            <button class="btn btn-success text-white" type="button">Proceed To Payment</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addressRadios = document.querySelectorAll('.address-radio');
+        const selectAddressButtons = document.querySelectorAll('.select-address');
+
+        // Initially hide all "Deliver Here" buttons except the first one
+        for (let i = 1; i < selectAddressButtons.length; i++) {
+            selectAddressButtons[i].style.display = 'none';
+        }
+
+        addressRadios.forEach(function (radio, index) {
+            radio.addEventListener('change', function () {
+                // Hide all "Deliver Here" buttons
+                selectAddressButtons.forEach(function (button) {
+                    button.style.display = 'none';
+                });
+
+                // Display "Deliver Here" button for the selected address
+                if (this.checked) {
+                    selectAddressButtons[index].style.display = 'inline-block';
+                }
+            });
+        });
+
+        const changeButton = document.getElementById("change-button");
+        const addressList = document.getElementById("address-list");
+        const addressListBody = document.getElementById("address-list-body");
+        selectAddressButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                changeButton.style.display = "inline-block";
+                selectedIndex = button.getAttribute("data-address-index");
+                selectedAddress = document.getElementById("address-list" + selectedIndex);
+                addressList.style.display = 'none';
+                addressLabel = selectedAddress.querySelector("label").textContent
+                const addressHTML = `<p>${addressLabel}<br>${selectedAddress.querySelector("address").innerHTML}</p>`;
+                addressListBody.innerHTML = addressHTML
+            });
+        });
+
+        changeButton.addEventListener('click', function () {
+            location.reload()
+        });
+
+        const priceElements = document.querySelectorAll('.price-format');
+        priceElements.forEach(function (element) {
+            const price = parseFloat(element.textContent.replace('₹ ', '').replace(/,/g, ''));
+            const formattedPrice = price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+            element.textContent = formattedPrice;
+        });
+
+
+    });
+</script>
+
+
+
+
+
+
+{% include "footer.html" %}

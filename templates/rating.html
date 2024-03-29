@@ -1,0 +1,20 @@
+{% from 'bootstrap5/form.html' import render_form %}
+{% include "header.html" %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="m-5 text-white description-box">
+    <div class="py-1 px-4">
+        <form id="ratingForm" action="" method="post">
+            <p>Rating: </p>
+            <span class="fa fa-star" onclick="rateStar(1)"></span>
+            <span class="fa fa-star" onclick="rateStar(2)"></span>
+            <span class="fa fa-star" onclick="rateStar(3)"></span>
+            <span class="fa fa-star" onclick="rateStar(4)"></span>
+            <span class="fa fa-star" onclick="rateStar(5)"></span>
+            {{ render_form(form) }}
+            <input type="hidden" id="rating" name="rating" value="0">
+            <div id="ratingError" class="text-danger" style="display: none;">Please select a star rating.</div>
+        </form>
+    </div>
+</div>
+
+{% include "footer.html" %}

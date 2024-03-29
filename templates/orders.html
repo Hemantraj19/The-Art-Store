@@ -1,0 +1,28 @@
+{% include "header.html" %}
+
+{% for _ in range(3) %}
+<div class="m-4 order-box text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-3">
+                <div class="order-img">
+                    <img src="../static/img/download.jpg " alt="order-img">
+                </div>
+            </div>
+            <div class="col-lg-3 order-item-title">
+                <p>Item Title</p>
+                <p>Quantity: 1</p>
+            </div>
+            <div class="col-lg-3">
+                <p>Item Price</p>
+            </div>
+            <div class="col-lg-3">
+                <p>Delivered on</p>
+                <a href="#" class="nav-link">Rate And Review</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{%endfor%}
+{% include "footer.html" %}
