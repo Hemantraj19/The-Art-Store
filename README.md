@@ -2,6 +2,13 @@
 
 This is a Flask-based online store application designed to handle both user and seller functionalities. It provides features for user registration, login, browsing items, adding items to the cart, checkout, and seller-specific operations like adding and managing products.
 
+![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(5).png)
+![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(6).png)
+![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(7).png)
+![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(8).png)
+![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(9).png)
+
+
 ## Table of Contents
 - [Features](#features)
 - [Setup](#setup)
