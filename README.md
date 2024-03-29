@@ -1,13 +1,12 @@
-# Flask Online Store README
+# The Art Store
 
-This is a Flask-based online store application designed to handle both user and seller functionalities. It provides features for user registration, login, browsing items, adding items to the cart, checkout, and seller-specific operations like adding and managing products.
+This is a Flask-based online store application designed to handle both user and seller functionalities. It provides features for user registration, login, browsing items, adding items to the cart, checkout, and seller-specific operations like adding and managing products. Additionally, images are saved to Firebase storage, and users can leave ratings and reviews for items.
 
-![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(5).png)
-![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(6).png)
-![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(7).png)
-![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(8).png)
-![Image Description](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(9).png)
-
+![User Interface Screenshots](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(5).png)
+![User Interface Screenshots](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(6).png)
+![User Interface Screenshots](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(7).png)
+![User Interface Screenshots](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(8).png)
+![User Interface Screenshots](https://github.com/Hemantraj19/The-Art-Store/blob/main/Screenshot%20(9).png)
 
 ## Table of Contents
 - [Features](#features)
@@ -28,6 +27,7 @@ This is a Flask-based online store application designed to handle both user and 
 - Remove items from the cart
 - View and manage addresses
 - Checkout and payment
+- Leave ratings and reviews for items
 
 ### Seller Features
 - Seller registration with email, name, password, phone number, and address
@@ -41,7 +41,7 @@ This is a Flask-based online store application designed to handle both user and 
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your_username/flask-online-store.git
+   git clone https://github.com/Hemantraj19/The-Art-Store.git
    ```
 2. Navigate to the project directory:
    ```
