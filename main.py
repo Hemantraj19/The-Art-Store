@@ -180,7 +180,7 @@ def before_request():
 @app.route("/")
 def home():
 
-    if current_user.is_seller:
+    if current_user.is_authenticated and current_user.is_seller:
         return redirect(url_for("seller_home"))
 
     items = db.session.execute(db.select(Item)).scalars().all()
